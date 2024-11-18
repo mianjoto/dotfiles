@@ -1,0 +1,14 @@
+#!/bin/sh
+
+install() {
+    for var in "$@"; do
+        [ ! -f ./"$var"/setup ] && echo "Cannot set up $var - setup script not found in $PWD/$var/setup" && return 1
+        ./"$1"/setup
+    done
+}
+
+echo "setting up dotfiles..."
+
+for tool in */; do install "$tool"; done
+
+echo "successfully set up dotfiles!"
