@@ -13,4 +13,7 @@ echo "setting up dotfiles..."
 
 for tool in */; do install "$tool"; done
 
+ln -sf "$PWD/.gitconfig" "$HOME/.gitconfig"
+ln -sf "$PWD/.inputrc" "$HOME/.inputrc"
+
 echo "successfully set up dotfiles!"
