@@ -3,7 +3,9 @@
 install() {
     for var in "$@"; do
         [ ! -f ./"$var"/setup ] && echo "Cannot set up $var - setup script not found in $PWD/$var/setup" && return 1
-        ./"$1"/setup
+        cd "$1"
+        ./setup
+        cd -
     done
 }
 

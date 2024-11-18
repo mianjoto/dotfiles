@@ -1,0 +1,22 @@
+#!/bin/sh
+
+INITIAL_PWD=$PWD
+SCRIPTS_DIR="$HOME/scripts"
+
+# create scripts dir if does not exist 
+[ ! -d $SCRIPTS_DIR ] && mkdir $SCRIPTS_DIR && "Created scripts directory in $SCRIPTS_DIR"
+
+install_scripts () {
+    for script_category in "$@"; do 
+        [ ! -d "$SCRIPTS_DIR/$script_category" ] && mkdir "$SCRIPTS_DIR/$script_category"
+        cd $script_category 
+        for script in *; do
+            ln -sf "$PWD/$script" "$SCRIPTS_DIR/$1/$script";
+        done
+        cd -
+    done
+}
+
+install_scripts bash
+
+cd $INITIAL_PWD
