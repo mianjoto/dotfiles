@@ -1,11 +1,70 @@
 [user]
-	email = 78712025+mianjoto@users.noreply.github.com
 	name = Miguel Jover
+	email = 78712025+mianjoto@users.noreply.github.com
+[alias]
+	aa = add --all # add all
+	bv = branch -vv # branch verbose
+	ba = branch -ra # ilst all branches (including remote branches)
+	bd = branch -d # branch delete
+	ca = commit --amend # amend previous commit
+	cb = checkout -b # checkout branch
+	cm = commit -a --amend -C HEAD # amend and override recent commit
+	ci = commit -a -v 
+	co = checkout
+	di = diff
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat # log long
+	ld = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph # log with date
+	ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative # log with date (short)
+	mm = merge --no-ff # merge via merge commit
+	st = status --short --branch # status (short)
+	tg = tag -a # all tags
+	pu = push --tags # push (with tags)
+	un = reset --hard HEAD # unstage
+	uncommit = uncommit = reset --soft HEAD^
+	uh = reset --hard HEAD^ # unstage (hard)
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	editor = vim
+	excludefile = ~/.gitignore_global
+	pager = cat # don't paginate output
+	untrackedCache = true # speed up git status 
+	whitespace = -trailing-space # don't consider trailing space change as a cause for merge conflicts
+[credential]
+	helper = cache --timeout=36000  # save cache for 10 hrs
+[diff]
+	mnemonicPrefix = true # use better, descriptive initials (c, i, w) instead of a/b.
+	renames = true # show renames/moves as such
+	tool = vimdiff # use vim for diff
+	submodule = log # display submodule-related information (commit listings)
+	wordRegex = . # when using --word-diff, assume --word-diff-regex=.
+[difftool]
+	prompt = false # doesn't prompt before each invocation of the diff tool
+[fetch]
+	recurseSubmodules = on-demand # auto-fetch submodule changes (sadly, won't auto-update)
+[grep]
+	extendedRegexp = true # consider most regexes to be ERE
+[help]
+	autocorrect = 1 # replace the mistyped command in 0.1 seconds. 20 means two seconds
 [init]
 	defaultBranch = main
-[credential]
-	credentialStore = gpg
-	helper = 
-	helper = /usr/local/bin/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+[log]
+	abbrevCommit = true # use abbrev SHAs whenever possible/relevant instead of full 40 chars
+	follow = true # automatically --follow the rename of a single file
+[pull]
+	default = current
+[push]
+	default = current
+[status]
+	showUntrackedFiles = all # recursively traverse untracked directories to display all contents
+[tag]
+	sort = version:refname # sort tags as version numbers whenever applicable, so 1.10.2 is AFTER 1.2.0.
+[versionsort]
+	prereleaseSuffix = -pre
+	prereleaseSuffix = .pre
+	prereleaseSuffix = -beta
+	prereleaseSuffix = .beta
+	prereleaseSuffix = -rc
+	prereleaseSuffix = .rc
