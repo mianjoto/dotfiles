@@ -109,6 +109,11 @@ cd ()
     fi
 }
 
+# alias xdg-open to open
+open() {
+    command xdg-open "$@"
+}
+
 # open/reload configuration files
 cfg () {
     # $1 - action
