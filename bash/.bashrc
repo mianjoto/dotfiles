@@ -109,6 +109,34 @@ cd ()
     fi
 }
 
+# open/reload configuration files
+cfg () {
+    # $1 - action
+    #   reload/r or source/s = reload/source configuration
+    #   open/o = edit the configuration file
+    #
+    # $2 - configuration
+    #   supported configuration files include
+    #   - dotfiles (~/dotfiles)
+    #   - bash (~/.bashrc)
+    #   - tmux (~/.tmux.conf)
+    #   - neovim (~/.config/nvim)
+
+    if [[ "$1" == "r"* ]]; then
+        [[ "$2" == *"bash"* ]] && source ~/.bashrc
+        [[ "$2" == *"tmux"* ]] && source ~/.tmux.conf
+        [[ "$2" == *"nvim"* ]] && source ~/.config/nvim/init.lua
+        [[ "$2" == *"dot"* ]] && cd ~/dotfiles && ./setup
+    fi
+
+    if [[ "$1" == "o"* ]]; then
+        [[ "$2" == *"bash"* ]] && nvim ~/.bashrc
+        [[ "$2" == *"tmux"* ]] && nvim ~/.tmux.conf
+        [[ "$2" == *"nvim"* ]] && nvim ~/.config/nvim
+        [[ "$2" == *"dot"* ]] && nvim ~/dotfiles
+    fi
+}
+
 ### prompt
 
 GITPROMPTPATH="$HOME/scripts/bash/git-prompt"
