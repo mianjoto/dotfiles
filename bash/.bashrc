@@ -21,18 +21,18 @@ export HISTCONTROL=ignoreboth # ignores commands with leading spaces/consecutive
 export HISTSIZE=5000
 export HISTFILESIZE=10000
 
-shopt -s autocd # automatically change directories to named directories
-shopt -s cdspell # autocorrect cd misspellings
-shopt -s checkwinsize # update window size after command if necessary
-shopt -s cmdhist # save multi-line commands in history as single line
-shopt -s direxpand # autocorrect mispelled directory names during <Tab> completion (if dirspell opt is also set)
-shopt -s dirspell # autocorrect mispelled directory names during <Tab> completion (if direxpand is also set)
-shopt -s dotglob # include filenames beginning with a `.` in the results of pathname expansion
+shopt -s autocd         # automatically change directories to named directories
+shopt -s cdspell        # autocorrect cd misspellings
+shopt -s checkwinsize   # update window size after command if necessary
+shopt -s cmdhist        # save multi-line commands in history as single line
+shopt -s direxpand      # autocorrect mispelled directory names during <Tab> completion (if dirspell opt is also set)
+shopt -s dirspell       # autocorrect mispelled directory names during <Tab> completion (if direxpand is also set)
+shopt -s dotglob        # include filenames beginning with a `.` in the results of pathname expansion
 shopt -s expand_aliases # enable use of aliases
-shopt -s extglob # use extended globbing in pathname expansion
-shopt -s globstar # allow use of `**` globbing patterns
-shopt -s histappend # do not overwrite history
-shopt -s nocaseglob # ignore case in filename expansion
+shopt -s extglob        # use extended globbing in pathname expansion
+shopt -s globstar       # allow use of `**` globbing patterns
+shopt -s histappend     # do not overwrite history
+shopt -s nocaseglob     # ignore case in filename expansion
 
 bind "set completion-ignore-case on" # ignore upper and lowercase for <Tab> completion
 
@@ -62,7 +62,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 ### editor
 
-_have vim && alias vi=vim && EDITOR=vim # set to vim if installed
+_have vim && alias vi=vim && EDITOR=vim    # set to vim if installed
 _have nvim && alias vi=nvim && EDITOR=nvim # set to nvim if installed
 
 ### aliases
@@ -71,25 +71,25 @@ _have nvim && alias vi=nvim && EDITOR=nvim # set to nvim if installed
 alias t="tmux"
 
 # list
-alias la="ls -A" # look-all
-alias ll="ls -lA" # look-long
-alias l="ls" # look
+alias la="ls -A"               # look-all
+alias ll="ls -lA"              # look-long
+alias l="ls"                   # look
 alias l.="ls -A | egrep '^\.'" # look-dotfiles
 
 # git
-alias gs="git status" # git status
-alias gl="git log" # git log
-alias ga="git add" # git add
+alias gs="git status"       # git status
+alias gl="git log"          # git log
+alias ga="git add"          # git add
 alias gu="git rm --cached " # git unstage
-alias gaa="git add ." # git add all files
-alias gd="git diff" # git list diff
-alias gr="git restore" # git restore
-alias gp="git push" # git push
-alias gsw="git switch" # git switch to branch
+alias gaa="git add ."       # git add all files
+alias gd="git diff"         # git list diff
+alias gr="git restore"      # git restore
+alias gp="git push"         # git push
+alias gsw="git switch"      # git switch to branch
 alias gcb="git checkout -b" # git create and switch to branch
-alias gc="git commit -m" # git commit
-alias gcm="git commit -m" # git commit
-alias rmgit="rmd .git" # Remove .git folder
+alias gc="git commit -m"    # git commit
+alias gcm="git commit -m"   # git commit
+alias rmgit="rmd .git"      # Remove .git folder
 
 # typos
 alias cd..="cd .."
@@ -100,8 +100,7 @@ alias cho="echo"
 ### quality of life functions
 
 # automatically run "ls" after changing dirs
-cd ()
-{
+cd() {
     if [ -n "$1" ]; then
         builtin cd "$@" && ls
     else
@@ -115,7 +114,7 @@ open() {
 }
 
 # open/reload configuration files
-cfg () {
+cfg() {
     # $1 - action
     #   reload/r or source/s = reload/source configuration
     #   open/o = edit the configuration file
@@ -146,38 +145,40 @@ cfg () {
 
 GITPROMPTPATH="$HOME/scripts/bash/git-prompt"
 
-function __setprompt
-{
+function __setprompt {
     local LAST_COMMAND=$? # Must come first!
 
-    # Define colors
-    local LIGHTGRAY="\033[0;37m"
-    local WHITE="\033[1;37m"
-    local BLACK="\033[0;30m"
-    local DARKGRAY="\033[1;30m"
+    # Define colors and styles
+    # see https://stackoverflow.com/a/33206814 for more details
+    local BOLD="\[\033[1m\]"  # the 1 determines bold
+    local DIM="\[\033[2m\]"   # the 2 determines dim
+    local PLAIN="\[\033[0m\]" # the 0 determines reset formatting
+    local FG="\[\033[38;5;"   # start of color declaration, 38;5 determines foreground color
+    local BG="\[\033[48;5;"   # start of color declaration, 48;5 determines background color
+    local FG_DEFAULT="\[\033[39m\]"
+    local BG_DEFAULT="\[\033[49m\]"
     local RED="\033[0;31m"
     local LIGHTRED="\033[1;31m"
-    local GREEN="\033[0;32m"
-    local LIGHTGREEN="\033[1;32m"
-    local BROWN="\033[0;33m"
-    local YELLOW="\033[1;33m"
-    local BLUE="\033[0;34m"
-    local LIGHTBLUE="\033[1;34m"
-    local MAGENTA="\033[0;35m"
-    local LIGHTMAGENTA="\033[1;35m"
-    local CYAN="\033[0;36m"
-    # local LIGHTCYAN="\033[1;36m"
-    local NOCOLOR="\033[0m"
+    local WHITE="15m\]"
+    local DARKGRAY="234m\]"
+    local DEEPBLUE="33m\]"
+    local ORANGE="209m\]"
+    local FG_DARKGRAY="${FG}${DARKGRAY}"
+    local BG_DARKGRAY="${BG}${DARKGRAY}"
+    local FG_DEEPBLUE="${FG}${DEEPBLUE}"
+    local BG_DEEPBLUE="${BG}${DEEPBLUE}"
+    local FG_ORANGE="${FG}${ORANGE}"
+    local BG_ORANGE="${BG}${ORANGE}"
 
-    # Custom colors
-    local LIGHTCYAN="\033[38;5;123m"
-    local LIGHTBROWN="\033[38;5;215m"
-    local LIGHTPINK="\033[38;5;225m"
+    # Nerd font icons
+    local LEFTCAP=""
+    local RIGHTCAP=""
+    local FOLDERICON="󰉋"
+    local GITICON=""
 
     # Show error exit code if there is one
     if [[ $LAST_COMMAND != 0 ]]; then
-        # PS1="\[${RED}\](\[${LIGHTRED}\]ERROR\[${RED}\])-(\[${LIGHTRED}\]Exit Code \[${WHITE}\]${LAST_COMMAND}\[${RED}\])-(\[${LIGHTRED}\]"
-        PS1="\[${DARKGRAY}\](\[${LIGHTRED}\]ERROR\[${DARKGRAY}\])-(\[${RED}\]Exit Code \[${LIGHTRED}\]${LAST_COMMAND}\[${DARKGRAY}\])-(\[${RED}\]"
+        PS1="\[${RED}\](\[${LIGHTRED}\]ERROR\[${RED}\])-(\[${LIGHTRED}\]Exit Code ${FG}${WHITE}${LAST_COMMAND}\[${RED}\])-(\[${LIGHTRED}\]"
         if [[ $LAST_COMMAND == 1 ]]; then
             PS1+="General error"
         elif [ $LAST_COMMAND == 2 ]; then
@@ -211,7 +212,7 @@ function __setprompt
         else
             PS1+="Unknown error code"
         fi
-        PS1+="\[${DARKGRAY}\])\[${NOCOLOR}\]\n"
+        PS1+="\[${RED}\])\n"
     else
         PS1=""
     fi
@@ -220,47 +221,46 @@ function __setprompt
     PS1+="\n"
 
     # Current directory
-    PS1+="\[${LIGHTCYAN}\]\w\[${DARKGRAY}\] "
+    PS1+="${BG_DEFAULT}${FG_DEEPBLUE}${LEFTCAP}"         # blue left cap
+    PS1+="${BG_DEEPBLUE}${FG_DARKGRAY}${FOLDERICON}"     # dark gray folder icon
+    PS1+="${BG_DARKGRAY}${FG_DEEPBLUE}${RIGHTCAP}"       # blue right cap (transition to dark gray)
+    PS1+="${BG_DARKGRAY}${FG_DEFAULT}${BOLD} \w${PLAIN}" # white cwd on dark gray bg
+    PS1+="${BG_DEFAULT}${FG_DARKGRAY}${RIGHTCAP}"        # ending right cap
 
     # Git branch and head info
     if [ -f "$GITPROMPTPATH" ]; then
         source $GITPROMPTPATH
         local GIT_INFO=$(__git_ps1 "%s")
         if [ -n $GIT_INFO ] && [ ${#GIT_INFO} -gt 0 ]; then
-            PS1+="\[${DARKGRAY}\](\[${LIGHTGRAY}\]${GIT_INFO}\[${DARKGRAY}\]) "
+            PS1+=" "                                       # add space between chips
+            PS1+="${BG_DEFAULT}${FG_ORANGE}${LEFTCAP}"     # orange left cap
+            PS1+="${BG_ORANGE}${FG_DARKGRAY}${GITICON}"    # dark gray git icon
+            PS1+="${BG_DARKGRAY}${FG_ORANGE}${RIGHTCAP}"   # orange right cap (transition to dark gray)
+            PS1+="${BG_DARKGRAY}${FG_DEFAULT} ${GIT_INFO}" # white git info on dark gray bg
+            PS1+="${BG_DEFAULT}${FG_DARKGRAY}${RIGHTCAP}"  # ending right cap
         else
             PS1+=""
         fi
     fi
 
-    # Date
-    PS1+="\[${DARKGRAY}\][\[${LIGHTPINK}\]\$(date +%a) $(date +%b'%_m')\[${DARKGRAY}\] - " # Date
-    PS1+="${LIGHTBROWN}$(date +'%-I':%M:%S) $(date +%P)\[${DARKGRAY}\]]" # Time
-
-    # Skip to the next line
-    PS1+="\n"
-
-    if [[ $EUID -ne 0 ]]; then
-        PS1+="\[${GREEN}\]$\[${NOCOLOR}\] " # Normal user
-    else
-        PS1+="\[${RED}\]$\[${NOCOLOR}\] " # Root user
-    fi
+    # Prompt sign below
+    PS1+="\n${FG_DEFAULT}${DIM}\$${PLAIN} "
 
     # PS2 is used to continue a command using the \ character
-    PS2="\[${DARKGRAY}\]>\[${NOCOLOR}\] "
+    PS2="${FG_DARKGRAY}>${FG_DEFAULT} "
 
     # PS3 is used to enter a number choice in a script
-    PS3='Please enter a number from above list: '
+    PS3="Please enter a number from above list: "
 
     # PS4 is used for tracing a script in debug mode
-    PS4='\[${DARKGRAY}\]+\[${NOCOLOR}\] '
+    PS4="${FG_DARKGRAY}+${FG_DEFAULT} "
 }
 
-PROMPT_COMMAND='__setprompt'
+PROMPT_COMMAND="__setprompt"
 
 ### sourcing/PATH configuration and completion
 
-# Enable programmable completion features 
+# Enable programmable completion features
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
@@ -272,4 +272,3 @@ fi
 export PATH
 
 _have z && . <(z completion bash)
-
