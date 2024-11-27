@@ -8,6 +8,15 @@ ln -sf "$PWD/lazy-lock.json" "$HOME/.config/nvim/lazy-lock.json"
 ln -sf "$PWD/.stylua.toml" "$HOME/.config/nvim/.stylua.toml"
 ln -sf "$PWD/lua/kickstart/health.lua" "$HOME/.config/nvim/lua/kickstart/health.lua"
 
+# clear existing plugin symlinks if any
+for file in "$HOME/.config/nvim/lua/kickstart/plugins"/*; do
+	rm $file
+done
+
+for file in "$HOME/.config/nvim/lua/custom/plugins"/*; do
+	rm $file
+done
+
 # install kickstart plugins
 for file in "$PWD/lua/kickstart/plugins"/*; do
 	if [ -f "$file" ]; then
