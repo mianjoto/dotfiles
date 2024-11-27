@@ -1,0 +1,25 @@
+#!/bin/sh
+
+mkdir -p "$HOME/.config/nvim/lua/kickstart/plugins"
+mkdir -p "$HOME/.config/nvim/lua/custom/plugins"
+
+ln -sf "$PWD/init.lua" "$HOME/.config/nvim/init.lua"
+ln -sf "$PWD/lazy-lock.json" "$HOME/.config/nvim/lazy-lock.json"
+ln -sf "$PWD/.stylua.toml" "$HOME/.config/nvim/.stylua.toml"
+ln -sf "$PWD/lua/kickstart/health.lua" "$HOME/.config/nvim/lua/kickstart/health.lua"
+
+# install kickstart plugins
+for file in "$PWD/lua/kickstart/plugins"/*; do
+	if [ -f "$file" ]; then
+		ln -sf "$file" "$HOME/.config/nvim/lua/kickstart/plugins/$(basename "$file")"
+	fi
+done
+
+# install custom plugins
+mkdir -p "$HOME/.config/nvim/lua/custom/plugins"
+for file in "$PWD/lua/custom/plugins"/*; do
+	if [ -f "$file" ]; then
+		ln -sf "$file" "$HOME/.config/nvim/lua/custom/plugins/$(basename "$file")"
+	fi
+done
+
