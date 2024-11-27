@@ -33,7 +33,9 @@
 	untrackedCache = true # speed up git status 
 	whitespace = -trailing-space # don't consider trailing space change as a cause for merge conflicts
 [credential]
-	helper = cache --timeout=36000  # save cache for 10 hrs
+	credentialStore = gpg
+	helper = cache --timeout 21600
+	helper = oauth
 [diff]
 	mnemonicPrefix = true # use better, descriptive initials (c, i, w) instead of a/b.
 	renames = true # show renames/moves as such
@@ -68,3 +70,5 @@
 	prereleaseSuffix = .beta
 	prereleaseSuffix = -rc
 	prereleaseSuffix = .rc
+[credential "https://dev.azure.com"]
+	useHttpPath = true
