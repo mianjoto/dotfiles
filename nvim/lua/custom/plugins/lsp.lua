@@ -173,7 +173,7 @@ return {
         cssls = {},
         dockerls = {},
         eslint = {},
-        gradle_ls = {},
+        -- gradle_ls = {},
         html = {},
         -- jdtls = {}, -- refer to this for setup guidance: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/guides/setup-with-nvim-jdtls.md
         jsonls = {},
@@ -208,11 +208,14 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        -- lsps
+        'jdtls',
         -- linters
         'eslint_d',
         'markdownlint',
         -- debug adapters
-        --'java-debug-adapter',
+        'java-debug-adapter',
+        'java-test',
         -- formatter
         'prettier',
         'prettierd',
@@ -223,12 +226,14 @@ return {
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            if server_name ~= 'jdtls' then
+              local server = servers[server_name] or {}
+              -- This handles overriding only values explicitly passed
+              -- by the server configuration above. Useful when disabling
+              -- certain features of an LSP (for example, turning off formatting for ts_ls)
+              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+              require('lspconfig')[server_name].setup(server)
+            end
           end,
         },
       }

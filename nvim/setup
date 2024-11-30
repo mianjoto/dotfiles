@@ -17,6 +17,10 @@ for file in "$HOME/.config/nvim/lua/custom/plugins"/*; do
 	rm $file
 done
 
+for file in "$HOME/.config/nvim/ftplugin"/*; do
+	rm $file
+done
+
 # install kickstart plugins
 for file in "$PWD/lua/kickstart/plugins"/*; do
 	if [ -f "$file" ]; then
@@ -32,3 +36,10 @@ for file in "$PWD/lua/custom/plugins"/*; do
 	fi
 done
 
+# ftplugins
+mkdir -p "$HOME/.config/nvim/ftplugin"
+for file in "$PWD/ftplugin"/*; do
+	if [ -f "$file" ]; then
+		ln -sf "$file" "$HOME/.config/nvim/ftplugin/$(basename "$file")"
+	fi
+done

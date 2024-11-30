@@ -271,4 +271,11 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
+# export gradle to path
+export PATH="$PATH:/opt/gradle/gradle-8.11.1/bin"
+
 _have z && . <(z completion bash)
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
