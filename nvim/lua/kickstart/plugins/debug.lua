@@ -95,6 +95,50 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'java-debug-adapter',
+        'java',
+      },
+    }
+
+    dap.configurations.java = {
+      {
+        name = 'Debug Launch (2GB)',
+        type = 'java',
+        request = 'launch',
+        vmArgs = '' .. '-Xmx2g ',
+      },
+      {
+        name = 'Debug Attach (8000)',
+        type = 'java',
+        request = 'attach',
+        hostName = '127.0.0.1',
+        port = 8000,
+      },
+      {
+        name = 'Debug Attach (5005)',
+        type = 'java',
+        request = 'attach',
+        hostName = '127.0.0.1',
+        port = 5005,
+      },
+      {
+        name = 'My Custom Java Run Configuration',
+        type = 'java',
+        request = 'launch',
+        -- You need to extend the classPath to list your dependencies.
+        -- `nvim-jdtls` would automatically add the `classPaths` property if it is missing
+        -- classPaths = {},
+
+        -- If using multi-module projects, remove otherwise.
+        -- projectName = "yourProjectName",
+
+        -- javaExec = "java",
+        mainClass = 'replace.with.your.fully.qualified.MainClass',
+
+        -- If using the JDK9+ module system, this needs to be extended
+        -- `nvim-jdtls` would automatically populate this property
+        -- modulePaths = {},
+        vmArgs = '' .. '-Xmx2g ',
       },
     }
 
@@ -121,16 +165,16 @@ return {
     }
 
     -- Change breakpoint icons
-    -- vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
-    -- vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
-    -- local breakpoint_icons = vim.g.have_nerd_font
-    --     and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
-    --   or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
-    -- for type, icon in pairs(breakpoint_icons) do
-    --   local tp = 'Dap' .. type
-    --   local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
-    --   vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
-    -- end
+    vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
+    vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
+    local breakpoint_icons = vim.g.have_nerd_font
+        and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
+      or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
+    for type, icon in pairs(breakpoint_icons) do
+      local tp = 'Dap' .. type
+      local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
+      vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
+    end
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
