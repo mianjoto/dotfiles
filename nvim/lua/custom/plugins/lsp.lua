@@ -211,6 +211,7 @@ return {
         -- lsps
         'jdtls',
         -- linters
+        'cspell',
         'eslint_d',
         'markdownlint',
         -- debug adapters
