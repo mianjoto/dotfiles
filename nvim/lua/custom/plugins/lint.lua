@@ -7,7 +7,7 @@ return {
       lint.linters_by_ft = {
         java = { 'cspell' },
         javascript = { 'eslint_d', 'cspell' },
-        markdown = { 'markdownlint' },
+        markdown = { 'markdownlint', 'cspell' },
         typescript = { 'eslint_d', 'cspell' },
       }
 
