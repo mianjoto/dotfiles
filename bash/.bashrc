@@ -33,6 +33,7 @@ shopt -s extglob        # use extended globbing in pathname expansion
 shopt -s globstar       # allow use of `**` globbing patterns
 shopt -s histappend     # do not overwrite history
 shopt -s nocaseglob     # ignore case in filename expansion
+shopt -s progcomp       # set programmable completion on
 
 bind "set completion-ignore-case on" # ignore upper and lowercase for <Tab> completion
 
@@ -261,8 +262,16 @@ PROMPT_COMMAND="__setprompt"
 ### sourcing/PATH configuration and completion
 
 # Enable programmable completion features
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+if ! shopt -oq posix; then
+    # mac
+    if [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
+
+    # fedora
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    fi
 fi
 
 # add user binaries to path
