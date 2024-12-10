@@ -364,5 +364,5 @@ backend = "Vulkan"
 strategy = "continuous"
 target-fps = 165
 filters = [
-  "/home/mianjoto/slang-shaders/crt/newpixie-crt.slangp"
+  "/home/mianjoto/.local/share/slang-shaders/crt/newpixie-crt.slangp"
 ]
