@@ -125,13 +125,13 @@ blinking-interval = 800
 # • decorations - Set window decorations, options: "Enabled", "Disabled", "Transparent", "Buttonless"
 #
 # Example:
-# [window]
-# width = 600
-# height = 400
-# mode = "windowed"
-# opacity = 1.0
-# blur = false
-# decorations = "enabled"
+[window]
+width = 600
+height = 400
+mode = "fullscreen"
+opacity = 1.0
+blur = false
+decorations = "enabled"
 
 # Renderer
 #
