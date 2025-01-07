@@ -3,6 +3,7 @@
 return {
   { -- Main LSP Configuration
     'neovim/nvim-lspconfig',
+    version = '*',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
@@ -172,7 +173,15 @@ return {
         css_variables = {},
         cssls = {},
         dockerls = {},
-        eslint = {},
+        eslint = {
+          settings = {
+            useFlatConfig = true,
+            codeActionOnSave = {
+              enable = true,
+              mode = 'all',
+            },
+          },
+        },
         -- gradle_ls = {},
         html = {},
         -- jdtls = {}, -- refer to this for setup guidance: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/guides/setup-with-nvim-jdtls.md
@@ -212,7 +221,7 @@ return {
         'jdtls',
         -- linters
         'cspell',
-        'eslint_d',
+        { 'eslint_d', version = '13.1.2' },
         'markdownlint',
         -- debug adapters
         'java-debug-adapter',
