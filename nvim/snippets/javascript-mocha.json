@@ -1,0 +1,39 @@
+{
+  "describe": {
+    "prefix": "des",
+    "body": ["describe(\"${1:}\", () => {", "\t${0:}", "})"]
+  },
+  "test": {
+    "prefix": "t",
+    "body": ["test(\"${1:}\", () => {", "\t${0:}", "})"]
+  },
+  "it": {
+    "prefix": "it",
+    "body": ["it(\"${1:}\", () => {", "\t${0:}", "})"]
+  },
+  "xit": {
+    "prefix": "xit",
+    "body": ["xit(\"${1:}\", () => {", "\t${0:}", "})"]
+  },
+  "before": {
+    "prefix": "bef",
+    "body": ["before(() => {", "\t${0:}", "})"]
+  },
+  "beforeEach": {
+    "prefix": "befe",
+    "body": ["beforeEach(() => {", "\t${0:}", "})"]
+  },
+  "after": {
+    "prefix": "aft",
+    "body": ["after(() => {", "\t${0:}", "})"]
+  },
+  "afterEach": {
+    "prefix": "afte",
+    "body": ["afterEach(() => {", "\t${0:}", "})"]
+  },
+  "expect": { "prefix": "exp", "body": ["expect(${1:})${0}"] },
+  "expect to equal": {
+    "prefix": "expe",
+    "body": ["expect(${1:}).toEqual(${0})"]
+  }
+}

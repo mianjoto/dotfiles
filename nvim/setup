@@ -21,6 +21,11 @@ for file in "$HOME/.config/nvim/ftplugin"/*; do
 	rm $file
 done
 
+# clear existing snippets if any
+for file in "$HOME/.config/nvim/snippets"/*; do
+	rm $file
+done
+
 # install kickstart plugins
 for file in "$PWD/lua/kickstart/plugins"/*; do
 	if [ -f "$file" ]; then
@@ -41,5 +46,13 @@ mkdir -p "$HOME/.config/nvim/ftplugin"
 for file in "$PWD/ftplugin"/*; do
 	if [ -f "$file" ]; then
 		ln -sf "$file" "$HOME/.config/nvim/ftplugin/$(basename "$file")"
+	fi
+done
+
+# install snippets
+mkdir -p "$HOME/.config/nvim/snippets"
+for file in "$PWD/snippets"/*; do
+	if [ -f "$file" ]; then
+		ln -sf "$file" "$HOME/.config/nvim/snippets/$(basename "$file")"
 	fi
 done

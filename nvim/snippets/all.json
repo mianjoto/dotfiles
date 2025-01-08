@@ -1,0 +1,10 @@
+{
+  "Arrow function": {
+    "prefix": "afn",
+    "body": ["() => {$0}"]
+  },
+  "Arrow function with params": {
+    "prefix": "afn",
+    "body": ["($1) => {$0}"]
+  }
+}
