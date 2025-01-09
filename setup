@@ -16,4 +16,6 @@ for tool in */; do install "$tool"; done
 ln -sf "$PWD/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$PWD/.inputrc" "$HOME/.inputrc"
 
+ln -sf "$PWD/config/.cspell.json" "$HOME/.config/.cspell.json"
+
 echo "successfully set up dotfiles!"

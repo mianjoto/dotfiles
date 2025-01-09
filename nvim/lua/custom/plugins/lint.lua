@@ -5,12 +5,14 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        java = { 'cspell' },
-        javascript = { 'eslint', 'cspell' },
-        json = { 'cspell' },
-        markdown = { 'markdownlint', 'cspell' },
-        typescript = { 'eslint', 'cspell' },
+        javascript = { 'eslint' },
+        markdown = { 'markdownlint' },
+        typescript = { 'eslint' },
       }
+
+      -- cspell configuration
+      local cspell = lint.linters.cspell
+      cspell.args = table.insert(cspell.args, '--config ~/.config/cspell.config.yaml')
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
       -- instead set linters_by_ft like this:
@@ -55,6 +57,7 @@ return {
           -- describe the hovered symbol using Markdown.
           if vim.opt_local.modifiable:get() then
             lint.try_lint()
+            lint.try_lint 'cspell'
           end
         end,
       })
