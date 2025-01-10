@@ -11,9 +11,10 @@ if initialize_session "mixit"; then
 
   # Load a defined window layout.
   load_window "nvim"
-  load_window "next-storybook-servers"
-  load_window "git"
   load_window "bash"
+  load_window "next-storybook-servers"
+  load_window "jest-tests"
+  load_window "git"
 
   # Select the default active window on session creation.
   select_window "nvim"
