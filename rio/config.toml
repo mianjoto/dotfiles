@@ -360,9 +360,9 @@ family = "MesloLGM Nerd Font"
 
 [renderer]
 performance = "High"
-backend = "Vulkan"
-strategy = "continuous"
-target-fps = 165
-filters = [
-  "/home/mianjoto/.local/share/slang-shaders/crt/newpixie-crt.slangp"
-]
+# backend = "Vulkan"
+# strategy = "continuous"
+# target-fps = 165
+# filters = [
+#   "/home/mianjoto/.local/share/slang-shaders/crt/newpixie-crt.slangp"
+# ]
