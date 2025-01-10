@@ -12,7 +12,7 @@ if initialize_session "dotfiles"; then
   # Load a defined window layout.
   load_window "nvim"
   load_window "git"
-  new_window "bash"
+  load_window "bash"
 
   # Select the default active window on session creation.
   select_window "nvim"

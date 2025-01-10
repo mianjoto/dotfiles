@@ -4,7 +4,7 @@
 
 # Create new window. If no argument is given, window name will be based on
 # layout file name.
-new_window "git"
+new_window "git 󰊢"
 
 # Split window into panes.
 #split_v 20

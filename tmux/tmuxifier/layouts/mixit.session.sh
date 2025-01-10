@@ -13,7 +13,7 @@ if initialize_session "mixit"; then
   load_window "nvim"
   load_window "next-storybook-servers"
   load_window "git"
-  new_window "bash"
+  load_window "bash"
 
   # Select the default active window on session creation.
   select_window "nvim"
