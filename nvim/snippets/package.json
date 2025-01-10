@@ -1,0 +1,22 @@
+{
+  "name": "mianjoto-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "all"
+        ],
+        "path": "./all.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "./javascript-mocha.json"
+      }
+    ]
+  }
+}

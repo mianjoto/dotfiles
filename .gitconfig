@@ -34,8 +34,8 @@
 	whitespace = -trailing-space # don't consider trailing space change as a cause for merge conflicts
 [credential]
 	credentialStore = gpg
-	helper = cache --timeout 21600
-	helper = oauth
+	helper = 
+	helper = /usr/local/bin/git-credential-manager
 [diff]
 	mnemonicPrefix = true # use better, descriptive initials (c, i, w) instead of a/b.
 	renames = true # show renames/moves as such

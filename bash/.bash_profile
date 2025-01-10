@@ -7,3 +7,4 @@ if [ -n "$BASH_VERSION" -a -n "$PS1" ]; then
 fi
 
 source ~/.bashrc
+. "$HOME/.cargo/env"

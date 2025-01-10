@@ -1,0 +1,19 @@
+#!/bin/sh
+
+mkdir -p "$HOME/.config/rio"
+ln -sf "$PWD/config.toml" "$HOME/.config/rio/config.toml"
+
+# clear existing theme symlinks if any
+mkdir -p "$HOME/.config/rio/themes"
+for file in "$HOME/.config/rio/themes"/*; do
+	if [ -f "$file" ]; then
+            rm $file
+        fi
+done
+
+# install themes
+for file in "$PWD/themes"/*; do
+	if [ -f "$file" ]; then
+		ln -sf "$file" "$HOME/.config/rio/themes/$(basename "$file")"
+	fi
+done
