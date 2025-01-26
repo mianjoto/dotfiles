@@ -42,6 +42,8 @@
     "[snippets]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    // git
+    "git.autofetch": true,
     // prettier extension settings
     "prettier.tabWidth": 4,
     // vim extension settings
