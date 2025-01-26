@@ -1,0 +1,371 @@
+[
+    // navigation
+    // <leader> = <Space>
+    // bind CTRL+<hjkl> to switch between windows
+    {
+        "command": "workbench.action.navigateLeft",
+        "key": "ctrl-h"
+    },
+    {
+        "command": "workbench.action.navigateDown",
+        "key": "ctrl-j"
+    },
+    {
+        "command": "workbench.action.navigateUp",
+        "key": "ctrl-k"
+    },
+    {
+        "command": "workbench.action.navigateRight",
+        "key": "ctrl-l"
+    },
+    // bind <leader>. to show open buffers
+    {
+        "command": "workbench.action.showAllEditors",
+        "key": "space .",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader><leader> to use quick open (Ctrl-p)
+    {
+        "command": "workbench.action.quickOpen",
+        "key": "space space",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>bq to close (quit) current buffer
+    {
+        "command": "workbench.action.closeActiveEditor",
+        "key": "space b q",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>bw to save (write) current buffer
+    {
+        "command": "workbench.action.files.save",
+        "key": "space b w",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>ts to toggle status bar visibility
+    {
+        "command": "workbench.action.toggleStatusbarVisibility",
+        "key": "space t s",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>tt to toggle terminal visibility
+    {
+        "command": "workbench.action.toggleMaximizedPanel",
+        "key": "space t t",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>te to toggle sidebar (explorer) visibility
+    {
+        "key": "space e",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleSidebarVisibility",
+                "workbench.files.action.focusFilesExplorer"
+            ]
+        },
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && !sideBarFocus"
+    },
+    {
+        "key": "space e",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleSidebarVisibility",
+                "workbench.action.focusActiveEditorGroup"
+            ]
+        },
+        "when": "sideBarFocus && !inputFocus"
+    },
+    {
+        "key": "space e",
+        "when": "vim.mode == 'Normal' && editorTextFocus && foldersViewVisible",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    // bind <Tab>/<S-Tab> to navigate between tabs in editor group
+    {
+        "command": "workbench.action.nextEditorInGroup",
+        "key": "tab",
+        "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
+    },
+    {
+        "command": "workbench.action.previousEditorInGroup",
+        "key": "shift-tab",
+        "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>sf to search in files with grep
+    {
+        "command": "workbench.action.findInFiles",
+        "key": "space s f",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>ss to search in vscode settings
+    {
+        "command": "workbench.action.openSettingsJson",
+        "key": "space s s",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>sk to search in keyboard settings
+    {
+        "command": "workbench.action.openGlobalKeybindingsFile",
+        "key": "space s k",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <leader>gg to focus git source control window
+    {
+        "command": "workbench.view.scm",
+        "key": "space g g",
+        "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    },
+    // bind <C-J> to toggle panel visibility
+    {
+        "key": "ctrl-shift-j",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "!panelVisible && !panelMaximized"
+    },
+    {
+        "key": "ctrl-shift-j",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.focusActiveEditorGroup",
+                "workbench.action.togglePanel"
+            ]
+        },
+        "when": "panelVisible || panelMaximized"
+    },
+    // file explorer
+    {
+        "key": "enter",
+        "command": "explorer.openAndPassFocus",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceIsFolder && !inputFocus"
+    },
+    {
+        "key": "enter",
+        "command": "list.toggleExpand",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && explorerResourceIsFolder && !inputFocus"
+    },
+    {
+        "key": "space",
+        "command": "list.toggleExpand",
+        "when": "explorerResourceIsFolder && filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !inputFocus"
+    },
+    {
+        "key": "r",
+        "command": "renameFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "c",
+        "command": "filesExplorer.copy",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "p",
+        "command": "filesExplorer.paste",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "x",
+        "command": "filesExplorer.cut",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "d",
+        "command": "deleteFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "a",
+        "command": "explorer.newFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "shift-a",
+        "command": "explorer.newFolder",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "s",
+        "command": "explorer.openToSide",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "shift-s",
+        "command": "runCommands",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+        "args": {
+            "commands": [
+                "workbench.action.splitEditorDown",
+                "explorer.openAndPassFocus",
+                "workbench.action.closeOtherEditors"
+            ]
+        }
+    },
+    // editing
+    // bind J,K to move lines up/down (works with visually selected blocks)
+    {
+        "command": "editor.action.moveLinesDownAction",
+        "key": "shift-j",
+        "when": "vim.mode == 'VisualLine' && editorTextFocus"
+    },
+    {
+        "command": "editor.action.moveLinesUpAction",
+        "key": "shift-k",
+        "when": "vim.mode == 'VisualLine' && editorTextFocus"
+    },
+    // bind K to show hover popup
+    {
+        "command": "editor.action.showHover",
+        "key": "shift-k",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    // bind <leader>ca to show code actions
+    {
+        "command": "editor.action.codeAction",
+        "key": "space c a",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    // bind <leader>rn to rename
+    {
+        "command": "editor.action.rename",
+        "key": "space r n",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    // bind <leader>gs to go to symbol
+    {
+        "command": "workbench.action.gotoSymbol",
+        "key": "space g s",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    // bind <leader>ws to show workspace symbols
+    {
+        "command": "workbench.action.showAllSymbols",
+        "key": "space w s",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    // bind <leader>gd to go to definition
+    {
+        "command": "editor.action.revealDefinition",
+        "key": "space g d",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    // bind <leader>gr to go to references
+    {
+        "command": "editor.action.goToReferences",
+        "key": "space g r",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    // bind <leader>gi to go to implementation
+    {
+        "key": "space g i",
+        "command": "editor.action.goToImplementation",
+        "when": "vim.mode == 'Normal' && editorTextFocus"
+    },
+    // bind <C-n> to add next occurrence of word under cursor to selection
+    {
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "key": "ctrl-n",
+        "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
+    },
+    // terminal
+    // <prefix> = C-a
+    // bind <prefix>c to create new terminal window
+    {
+        "command": "workbench.action.terminal.new",
+        "key": "ctrl-a c",
+        "when": "terminalFocus"
+    },
+    // bind <prefix>x to kill current pane
+    {
+        "command": "workbench.action.terminal.kill",
+        "key": "ctrl-a x",
+        "when": "terminalFocus"
+    },
+    // bind <prefix>& to kill terminal window (seems to act same as above?)
+    {
+        "command": "workbench.action.terminal.killActiveTab",
+        "key": "ctrl-a shift-7",
+        "when": "terminalFocus"
+    },
+    // bind <prefix>| to split terminal pane vertically
+    {
+        "command": "workbench.action.terminal.split",
+        "key": "ctrl-a shift-\\",
+        "when": "terminalFocus"
+    },
+    // bind <prefix>p/n to navigate to previous/next terminal pane in window
+    {
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "key": "ctrl-a p",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusNextPane",
+        "key": "ctrl-a n",
+        "when": "terminalFocus"
+    },
+    // bind <prefix>P/N to navigate to previous/next terminal group
+    {
+        "command": "workbench.action.terminal.focusPrevious",
+        "key": "ctrl-a shift-p",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusNext",
+        "key": "ctrl-a shift-n",
+        "when": "terminalFocus"
+    },
+    // bind <prefix>w to list open terminals
+    {
+        "command": "workbench.action.quickOpenTerm",
+        "key": "ctrl-a w",
+        "when": "terminalFocus"
+    },
+    // bind <prefix>[1-9] to open terminal at indicated index
+    {
+        "command": "workbench.action.terminal.focusAtIndex1",
+        "key": "ctrl-a 1",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusAtIndex2",
+        "key": "ctrl-a 2",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusAtIndex3",
+        "key": "ctrl-a 3",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusAtIndex4",
+        "key": "ctrl-a 4",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusAtIndex5",
+        "key": "ctrl-a 5",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusAtIndex6",
+        "key": "ctrl-a 6",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusAtIndex7",
+        "key": "ctrl-a 7",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusAtIndex8",
+        "key": "ctrl-a 8",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "workbench.action.terminal.focusAtIndex9",
+        "key": "ctrl-a 9",
+        "when": "terminalFocus"
+    }
+]
