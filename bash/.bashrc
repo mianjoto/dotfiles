@@ -283,7 +283,13 @@ export PATH
 # export gradle to path
 export PATH="$PATH:/opt/gradle/gradle-8.11.1/bin"
 
+# export tmuxifier to path
+export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
+
 _have z && . <(z completion bash)
+
+# initialize tmuxifier
+eval "$(tmuxifier init -)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
